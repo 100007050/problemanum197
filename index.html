@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EL DESCIFRADOR DE MENSAJES</title>
+</head>
+<body>
+    <h1>EL DESCIFRADOR DE MENSAJES 🔎</h1>
+
+    <form onsubmit="descifrarMensaje(); return false;">
+        <input type="text" placeholder="Escribe tu mensaje" id="mensaje" name="mensaje">
+        <br><br>
+        <input type="submit" value="Descifrar">
+    </form>
+
+    <div id="resultado" style="display: none;">
+        <p id="paso1"></p>
+        <p id="paso2"></p>
+        <h3>Mensaje Descifrado:</h3>
+        <p id="paso3"></p>
+    </div>
+
+    <script>
+        function descifrarMensaje() {
+            var mensaje = document.getElementById("mensaje").value;
+
+            // Transformamos el string en un array
+            var mensajeArray = mensaje.split('');
+            var final = [];
+            var inicial = [];
+
+            // Separamos mediante el módulo de dos (par e impar)
+            for (var i = 0; i < mensajeArray.length; i++) {
+                if (i % 2 === 0) {
+                    inicial.push(mensajeArray[i]);
+                } else {
+                    final.push(mensajeArray[i]);
+                }
+            }
+
+            // Para obtener las letras, hay que girar el array 'final' con reverse
+            var finalBueno = final.reverse();
+
+            // Ahora podemos concatenar los dos arrays creados anteriormente y obtener mensaje1
+            var mensaje1 = inicial.join('') + finalBueno.join('');
+
+            // Convertir mensaje1 en un array de caracteres
+            var primeraEQ = mensaje1.split('');
+            primeraEQ.push(".");
+
+            var vocales = ["A", "E", "I", "O", "U", "a", "e", "i", "o", "u", "."];
+
+            var cont = 0;
+            var original = [];
+            var conso = [];
+
+            for (var i = 0; i < primeraEQ.length; i++) {
+                // Si es vocal
+                if (vocales.includes(primeraEQ[i])) {
+                    if (conso.length > 0) {
+                        var consoBueno = conso.reverse();
+                        original = original.concat(consoBueno);
+                    }
+                    // Subimos la vocal
+                    original.push(primeraEQ[i]);
+                    // Reiniciamos contador de consonantes
+                    cont = 0;
+                    // Antes de reiniciar el array de conso porque encuentra nueva vocal, subimos este array a la inversa
+                    // Hemos encontrado una vocal por lo tanto reiniciamos el array de consonantes
+                    conso = [];
+                } else { // Es consonante
+                    // Sumamos uno al contador de consonantes
+                    cont++;
+                    if (cont === 1) {
+                        // Hay dos opciones para que el contador sea 1, que después de la consonante vaya vocal o que sea la primera consonante de una cadena de consonantes.
+                        // Este if mira la posición de después de la consonante, si es una vocal, subirá la consonante a la frase original, sino la subirá al array de consonantes hasta que encuentre otra vocal que entrará en el primer if del código de Equacion1.php
+                        if (vocales.includes(primeraEQ[i + 1])) {
+                            original.push(primeraEQ[i]);
+                        } else {
+                            conso.push(primeraEQ[i]);
+                        }
+                    } else {
+                        conso.push(primeraEQ[i]);
+                    }
+                }
+            }
+
+            // Quitaremos el punto que hemos añadido a la frase como elemento que nos sirve por si hay dos últimas dos consonantes seguidas para poder ordenarlas correctamente
+            original.pop();
+
+            // Obtenemos el mensaje final transformándolo de array a string
+            var mensajeFinal = original.join('');
+
+            // Mostrar el mensaje descifrado en la página paso por paso
+            var resultadoDiv = document.getElementById("resultado");
+            var paso1 = document.getElementById("paso1");
+            var paso2 = document.getElementById("paso2");
+            var paso3 = document.getElementById("paso3");
+
+            paso1.textContent = "x2 = " + mensaje;
+            paso2.textContent = "x2 -> x1 = " + mensaje1;
+            paso3.textContent = "x1 -> x = " + mensajeFinal;
+
+            resultadoDiv.style.display = "block";
+        }
+    </script>
+</body>
+</html>
