@@ -1,0 +1,20 @@
+Leer x2 desde entrada POST
+Crear un arreglo mensaje a partir de x2
+
+Crear un arreglo vacío llamado inicial
+Crear un arreglo vacío llamado final
+
+Para cada elemento en el arreglo mensaje con índice i desde 0 hasta la longitud de mensaje:
+    Si i es par:
+        Agregar mensaje[i] a inicial
+    De lo contrario:
+        Agregar mensaje[i] a final
+
+Crear un arreglo finalbueno que sea una copia reversa del arreglo final
+
+Concatenar los elementos del arreglo inicial en una cadena inicial_str
+Concatenar los elementos del arreglo finalbueno en una cadena finalbueno_str
+
+Crear una cadena mensaje1 concatenando inicial_str y finalbueno_str
+
+Mostrar mensaje1
