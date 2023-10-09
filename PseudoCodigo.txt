@@ -1,3 +1,5 @@
+Descifrado 1
+
 Leer x2 desde entrada POST
 Crear un arreglo mensaje a partir de x2
 
@@ -18,3 +20,48 @@ Concatenar los elementos del arreglo finalbueno en una cadena finalbueno_str
 Crear una cadena mensaje1 concatenando inicial_str y finalbueno_str
 
 Mostrar mensaje1
+
+
+
+
+Desifrado 2
+
+Función darVueltaPalabra(frase):
+    // Divide la frase en palabras
+    palabras = frase.split(" ")
+    
+    // Inicializa una cadena vacía para almacenar el resultado
+    resultado = ""
+    
+    // Define una función para dar vuelta a las letras en modo espejo
+    Función darVueltaEspejo(palabra):
+        longitud = longitud de palabra
+        resultadoPalabra = ""
+        vocales = "aeiouAEIOU"
+        
+        // Recorre la palabra de atrás hacia adelante
+        Para i desde longitud - 1 hasta 0 hacer:
+            caracter = palabra[i]
+            Si caracter no está en vocales entonces:
+                // Si no es una vocal, agrega el caracter al resultado
+                resultadoPalabra += caracter
+        
+        // Agrega un espacio si no es la última palabra
+        Si palabra no es igual a la última palabra de palabras entonces:
+            resultadoPalabra += " "
+        
+        // Retorna la palabra procesada
+        Devolver resultadoPalabra
+    
+    // Recorre cada palabra en la frase
+    Para cada palabra en palabras hacer:
+        resultado += darVueltaEspejo(palabra)
+    
+    // Retorna el resultado completo
+    Devolver resultado
+
+// Ejemplo de uso
+fraseDesordenada = "E nul nugad rel aM ahcna"
+resultadoFinal = darVueltaPalabra(fraseDesordenada)
+Mostrar resultadoFinal
+ 
